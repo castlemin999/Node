@@ -18,12 +18,12 @@ app.get('/file1', (req, res) => {
   try {
     const data = fs.readFileSync('/file1.txt'); // 존재하지 않는 file1.txt
   } catch (error) {
-    res.sendStatus(404).send('File not Found!');
+    res.status(404).send('File not Found!');
   }
 
   fs.readFile('/file1.txt', (err, data) => {
     if (err) {
-      res.sendStatus(404).send('File not Found!');
+      res.status(404).send('File not Found!');
     }
   });
 });

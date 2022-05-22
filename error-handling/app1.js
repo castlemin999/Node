@@ -17,7 +17,7 @@ app.get('/file1', (req, res) => {
   try {
     const data = fs.readFileSync('/file1.txt'); // 존재하지 않는 file1.txt
   } catch (error) {
-    res.sendStatus(404).send('File not Found!');
+    res.status(404).send('File not Found!');
   }
 
   /*
@@ -27,11 +27,11 @@ app.get('/file1', (req, res) => {
     콜백함수에서 아무런 처리를 하지 않는다면 다음 미들웨어로 넘어가지 않게 된다.
     외부에서는 에러가 발생했는지 안했는지 확인 할 수가 없다.
   */
-  fs.readFile('/file1.txt', (err, data) => {
-    if (err) {
-      res.sendStatus(404).send('File not Found!');
-    }
-  });
+  // fs.readFile('/file1.txt', (err, data) => {
+  //   if (err) {
+  //     res.status(404).send('File not Found!');
+  //   }
+  // });
 
 });
 
@@ -44,7 +44,7 @@ app.get('/file2', (req, res) => {
     .readFile('/file2.txt') //
     .catch((error) => {
       //next(error) 이렇게 하면 맨 밑 app use의 에러처리까지 내려간다. 'Something went wrong'
-      res.sendStatus(404).send('File not Found!');;
+      res.status(404).send('File not Found!');;
     });
 });
 
@@ -58,7 +58,7 @@ app.get('/file3', async (req, res) => {
   try {
     const data = await fsAsync.readFile('/file2.txt');
   } catch(error) {
-    res.sendStatus(404).send('File not Found!');
+    res.status(404).send('File not Found!');
   }
 });
 
